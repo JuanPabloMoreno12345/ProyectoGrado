@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+  <t t-name="mi90_eos.Scorecard">
+    <div class="scorecard--wrap">
+      <div class="scorecard--toolbar">
+        <div class="tabs">
+          <span class="tab active">Semanal</span>
+          <span class="tab">Mensual</span>
+          <span class="tab">Trimestral</span>
+          <span class="tab">Anual</span>
+        </div>
+        <div class="filters">
+          <label>Equipo</label>
+          <select disabled>
+            <option>Mi Equipo</option>
+          </select>
+        </div>
+      </div>
+      <table class="scorecard--table">
+        <thead>
+          <tr>
+            <th>Owner</th>
+            <th>KPI</th>
+            <th>Meta</th>
+            <th>Promedio</th>
+            <th>Total</th>
+            <th>W-5</th>
+            <th>W-4</th>
+            <th>W-3</th>
+            <th>W-2</th>
+            <th>W-1</th>
+            <th>W</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dot dot-ros"></span> —</td>
+            <td>Meaningful Conversations</td>
+            <td>≥ 25</td>
+            <td>16.2</td>
+            <td>97</td>
+            <td>1</td><td>17</td><td>23</td><td>22</td><td>12</td><td>22</td>
+          </tr>
+          <tr>
+            <td><span class="dot dot-lav"></span> —</td>
+            <td>Thank You Cards</td>
+            <td>≥ 5</td>
+            <td>3.6</td>
+            <td>44</td>
+            <td>3</td><td>5</td><td>5</td><td>5</td><td>4</td><td>5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </t>
+</templates>
