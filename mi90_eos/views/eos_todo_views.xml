@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+  <t t-name="mi90_eos.Todos">
+    <div class="todos--wrap">
+      <ul class="todos--list">
+        <li class="todo"><input type="checkbox"/> Problema #5 <span class="tag today">Hoy</span></li>
+        <li class="todo"><input type="checkbox"/> To-Do #2 <span class="tag today">Hoy</span></li>
+        <li class="todo"><input type="checkbox"/> To-Do #4 <span class="tag today">Hoy</span></li>
+      </ul>
+    </div>
+  </t>
+</templates>

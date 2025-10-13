@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Acción del dashboard -->
+    <record id="action_mi90_dashboard" model="ir.actions.client">
+        <field name="name">EOS Dashboard</field>
+        <field name="tag">mi90_eos.dashboard_action</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menú principal EOS -->
+    <menuitem id="menu_eos_main" 
+              name="EOS Dashboard" 
+              web_icon="mi90_eos,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Dashboard principal -->
+    <menuitem id="menu_eos_dashboard" 
+              name="Mi 90" 
+              parent="menu_eos_main" 
+              action="mi90_eos.action_mi90_dashboard"
+              sequence="10"/>
+
+</odoo>
