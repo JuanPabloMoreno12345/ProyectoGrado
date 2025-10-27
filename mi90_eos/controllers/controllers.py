@@ -15,7 +15,8 @@ class Mi90EosController(http.Controller):
 
     @http.route('/mi90_eos/data/todos', type='http', auth='user', methods=['GET'], csrf=False)
     def todos(self, **kw):
-        todos = request.env['eos.todo'].sudo().search_read([], ['id', 'name', 'assigned_to', 'due_date', 'done', 'rock_id', 'note'])
+        # Provide fields matching the eos.todo model
+        todos = request.env['eos.todo'].sudo().search_read([], ['id', 'name', 'description', 'owner_id', 'due_date', 'status', 'progress', 'rock_id'])
         return request.make_response(json.dumps({'success': True, 'todos': todos}), headers=[('Content-Type', 'application/json')])
 
     @http.route('/mi90_eos/data/scorecard', type='http', auth='user', methods=['GET'], csrf=False)

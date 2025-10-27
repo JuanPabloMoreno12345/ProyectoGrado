@@ -10,10 +10,11 @@ class EosTodo(models.Model):
     owner_id = fields.Many2one('res.users', string='Owner', ondelete='set null', index=True)
     due_date = fields.Date(string='Due Date', index=True)
     status = fields.Selection([
-        ('todo', 'To Do'),
-        ('in_progress', 'In Progress'),
-        ('done', 'Done'),
-        ('cancel', 'Cancelled')
+        ('todo', 'Por Hacer'),
+        ('in_progress', 'En Curso'),
+        ('in_review', 'En Revisión'),
+        ('done', 'Finalizado'),
+        ('cancel', 'Cancelado')
     ], string='Status', default='todo', index=True)
     progress = fields.Float(string='Progress', compute='_compute_progress', store=True, group_operator='avg')
     rock_id = fields.Many2one('eos.rock', string='Related Rock', ondelete='set null')
@@ -42,8 +43,10 @@ class EosTodo(models.Model):
         for todo in self:
             if todo.status == 'done':
                 todo.progress = 100.0
+            elif todo.status == 'in_review':
+                todo.progress = 75.0
             elif todo.status == 'in_progress':
-                todo.progress = 50.0
+                todo.progress = 40.0
             elif todo.status == 'cancel':
                 todo.progress = 0.0
             else:

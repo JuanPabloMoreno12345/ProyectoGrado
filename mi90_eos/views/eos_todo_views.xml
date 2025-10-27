@@ -45,6 +45,14 @@
     <field name="view_mode">tree,form</field>
   </record>
 
-  <menuitem id="menu_eos_todo" name="To-Do" parent="mi90_eos.menu_mi90_root_models" action="mi90_eos.action_eos_todo" sequence="2"/>
+  <!-- Acción cliente dedicada al tablero To-Do -->
+  <record id="action_eos_todo_board" model="ir.actions.client">
+    <field name="name">To-Do Board</field>
+    <field name="tag">mi90_eos.todo_board</field>
+    <field name="target">current</field>
+  </record>
+
+  <!-- Link del menú To-Do hacia la nueva acción cliente que muestra solo el tablero -->
+  <menuitem id="menu_eos_todo" name="To-Do" parent="mi90_eos.menu_mi90_root_models" action="mi90_eos.action_eos_todo_board" sequence="2"/>
 
 </odoo>

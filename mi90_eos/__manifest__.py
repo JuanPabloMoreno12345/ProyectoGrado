@@ -25,6 +25,7 @@
         "web.assets_backend": [
             "mi90_eos/static/src/css/dashboard.css",
             "mi90_eos/static/src/xml/dashboard.xml",
+            "mi90_eos/static/src/xml/todos.xml",
             "mi90_eos/static/src/xml/scorecard.xml",
             "mi90_eos/static/src/js/dashboard_action.js"
         ]
