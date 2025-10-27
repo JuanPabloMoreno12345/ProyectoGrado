@@ -38,7 +38,15 @@
               </field>
             </page>
             <page string="Todos">
-              <field name="key_result_ids"/>
+              <field name="todo_ids">
+                <tree editable="bottom">
+                  <field name="name"/>
+                  <field name="owner_id"/>
+                  <field name="due_date"/>
+                  <field name="status"/>
+                  <field name="progress"/>
+                </tree>
+              </field>
             </page>
           </notebook>
         </sheet>
@@ -53,6 +61,6 @@
   </record>
 
   <menuitem id="menu_mi90_root_models" name="ROCAS" parent="mi90_eos.menu_root"/>
-  <menuitem id="menu_eos_rock" name="Rocks" parent="mi90_eos.menu_mi90_root_models" action="mi90_eos.action_eos_rock"/>
+  <menuitem id="menu_eos_rock" name="Rocks" parent="mi90_eos.menu_mi90_root_models" action="mi90_eos.action_eos_rock" sequence="1"/>
 
 </odoo>

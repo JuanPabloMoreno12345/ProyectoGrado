@@ -17,6 +17,7 @@ class EosRock(models.Model):
     ], string='Status', default='draft', index=True)
     progress = fields.Float(string='Progress', compute='_compute_progress', store=True, group_operator='avg')
     key_result_ids = fields.One2many('eos.key_result', 'rock_id', string='Key Results')
+    todo_ids = fields.One2many('eos.todo', 'rock_id', string='To-Dos')
 
     date_create = fields.Datetime(string='Created At', readonly=True, default=fields.Datetime.now)
     date_update = fields.Datetime(string='Updated At', readonly=True)
