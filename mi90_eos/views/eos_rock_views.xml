@@ -3,8 +3,8 @@
   <t t-name="mi90_eos.Rocks">
     <div class="rocks--wrap">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <h3 style="margin:0">Rocas</h3>
-        <a href="/web#action=mi90_eos.action_eos_rock" class="btn btn-sm btn-primary" style="text-decoration:none;padding:6px 10px;border-radius:6px">Ver todas las rocas</a>
+        <h3 style="margin:0">L10</h3>
+        <a href="/web#action=mi90_eos.action_eos_rock" class="btn btn-sm btn-primary" style="text-decoration:none;padding:6px 10px;border-radius:6px">Ver todos los L10</a>
       </div>
       <ul class="rocks--list">
         <li class="rock">

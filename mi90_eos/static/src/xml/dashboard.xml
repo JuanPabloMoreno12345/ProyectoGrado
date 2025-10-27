@@ -98,7 +98,7 @@
           <div class="mi90--card mi90--chart">
             <h2>Estado de Objetivos</h2>
             <div class="chart--wrap">
-              <div class="pie" aria-label="Estados de rocas"></div>
+              <div class="pie" aria-label="Estados de L10"></div>
               <div class="chart--info">
                 <div class="chart--total">3 <span>Total</span></div>
                 <ul class="chart--legend">

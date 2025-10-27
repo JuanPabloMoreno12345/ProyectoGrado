@@ -18,7 +18,7 @@
         </div>
 
         <div class="mi90--card mi90--rocks">
-          <h2>Rocas</h2>
+          <h2>L10</h2>
           <t t-call="mi90_eos.Rocks"/>
         </div>
 

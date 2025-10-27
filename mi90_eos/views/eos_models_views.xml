@@ -60,7 +60,7 @@
     <field name="view_mode">tree,form</field>
   </record>
 
-  <menuitem id="menu_mi90_root_models" name="ROCAS" parent="mi90_eos.menu_root"/>
+  <menuitem id="menu_mi90_root_models" name="L10" parent="mi90_eos.menu_root"/>
   <menuitem id="menu_eos_rock" name="Rocks" parent="mi90_eos.menu_mi90_root_models" action="mi90_eos.action_eos_rock" sequence="1"/>
 
 </odoo>
