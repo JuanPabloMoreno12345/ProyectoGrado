@@ -4,17 +4,15 @@
     <div class="mi90--wrap" t-ref="root">
       <div class="mi90--header">
         <h1>EOS DATA</h1>
-        <div class="mi90--nav-buttons">
-          <button class="mi90--nav-btn active" data-view="mi90">Mi 90</button>
-          <button class="mi90--nav-btn" data-view="scorecard">Scorecard</button>
-          <button class="mi90--nav-btn" data-view="rocas">Rocas</button>
-        </div>
+          <!-- Navigation buttons removed per request -->
         <div class="mi90--legend">
           <span class="dot dot-lav"></span> Lavanda
           <span class="dot dot-cel"></span> Celeste
           <span class="dot dot-ros"></span> Rosa
         </div>
       </div>
+
+      
 
       <div class="mi90--grid">
         <div class="mi90--card mi90--scorecard">

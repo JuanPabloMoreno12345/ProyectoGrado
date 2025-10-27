@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_eos_todo_tree" model="ir.ui.view">
+    <field name="name">eos.todo.tree</field>
+    <field name="model">eos.todo</field>
+    <field name="arch" type="xml">
+      <tree string="To-Dos">
+        <field name="name"/>
+        <field name="assigned_to"/>
+        <field name="due_date"/>
+        <field name="done"/>
+        <field name="rock_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_eos_todo_form" model="ir.ui.view">
+    <field name="name">eos.todo.form</field>
+    <field name="model">eos.todo</field>
+    <field name="arch" type="xml">
+      <form string="To-Do">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="assigned_to"/>
+            <field name="due_date"/>
+            <field name="done"/>
+            <field name="rock_id"/>
+            <field name="note"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_eos_todo" model="ir.actions.act_window">
+    <field name="name">To-Dos</field>
+    <field name="res_model">eos.todo</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_eos_todo" name="To-Dos" parent="mi90_eos.menu_mi90_root_models" action="mi90_eos.action_eos_todo"/>
+</odoo>
+<?xml version="1.0" encoding="utf-8"?>
 <templates xml:space="preserve">
   <t t-name="mi90_eos.Todos">
     <div class="todos--wrap">
       <ul class="todos--list">
-        <li class="todo"><input type="checkbox"/> Problema #5 <span class="tag today">Hoy</span></li>
-        <li class="todo"><input type="checkbox"/> To-Do #2 <span class="tag today">Hoy</span></li>
-        <li class="todo"><input type="checkbox"/> To-Do #4 <span class="tag today">Hoy</span></li>
+        <li class="todo"><input type="checkbox"/> Revisar propuesta cliente Tecnológica SL <span class="tag urgent">Urgente</span></li>
+        <li class="todo"><input type="checkbox"/> Preparar demo producto para reunión viernes <span class="tag today">Hoy</span></li>
+        <li class="todo"><input type="checkbox" checked="checked"/> Llamar a proveedor de marketing digital <span class="tag completed">Completado</span></li>
+        <li class="todo"><input type="checkbox"/> Actualizar CRM con nuevos contactos Q4 <span class="tag tomorrow">Mañana</span></li>
+        <li class="todo"><input type="checkbox"/> Enviar informes financieros a contabilidad <span class="tag week">Esta semana</span></li>
+        <li class="todo"><input type="checkbox"/> Organizar evento networking diciembre <span class="tag week">Esta semana</span></li>
+        <li class="todo"><input type="checkbox" checked="checked"/> Resolver incidencia servidor backup <span class="tag completed">Completado</span></li>
+        <li class="todo"><input type="checkbox"/> Planificar estrategia 2026 con dirección <span class="tag next-week">Próxima semana</span></li>
+        <li class="todo"><input type="checkbox"/> Negociar contratos proveedores cloud <span class="tag week">Esta semana</span></li>
+        <li class="todo"><input type="checkbox"/> Revisar métricas de satisfacción cliente <span class="tag tomorrow">Mañana</span></li>
+        <li class="todo"><input type="checkbox"/> Preparar presentación inversores <span class="tag urgent">Urgente</span></li>
+        <li class="todo"><input type="checkbox"/> Entrevistas candidatos desarrolladores <span class="tag today">Hoy</span></li>
+        <li class="todo"><input type="checkbox" checked="checked"/> Análisis competencia mercado europeo <span class="tag completed">Completado</span></li>
+        <li class="todo"><input type="checkbox"/> Definir roadmap producto 2026 <span class="tag next-week">Próxima semana</span></li>
       </ul>
     </div>
   </t>
