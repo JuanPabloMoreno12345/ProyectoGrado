@@ -20,6 +20,7 @@ class EosTodo(models.Model):
     ], string='Status', default='todo', index=True)
     progress = fields.Float(string='Progress', compute='_compute_progress', store=True, group_operator='avg')
     rock_id = fields.Many2one('eos.rock', string='Related Rock', ondelete='set null')
+    meeting_id = fields.Many2one('eos.meeting', string='L10 Meeting', ondelete='set null', index=True)
 
     date_create = fields.Datetime(string='Created At', readonly=True, default=fields.Datetime.now)
     date_update = fields.Datetime(string='Updated At', readonly=True)

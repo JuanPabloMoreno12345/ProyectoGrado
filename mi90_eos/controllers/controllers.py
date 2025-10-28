@@ -1,6 +1,7 @@
 from odoo import http, fields
 from odoo.http import request
 import json
+from datetime import date, timedelta
 
 class Mi90EosController(http.Controller):
     @http.route('/mi90_eos/data/rocks', type='http', auth='user', methods=['GET'], csrf=False)
@@ -19,6 +20,16 @@ class Mi90EosController(http.Controller):
         todos = request.env['eos.todo'].sudo().search_read([], ['id', 'name', 'description', 'owner_id', 'due_date', 'status', 'progress', 'rock_id'])
         return request.make_response(json.dumps({'success': True, 'todos': todos}), headers=[('Content-Type', 'application/json')])
 
+    @http.route('/mi90_eos/data/issues', type='http', auth='user', methods=['GET'], csrf=False)
+    def issues(self, **kw):
+        items = request.env['eos.issue'].sudo().search_read([], ['id', 'name', 'priority', 'resolved', 'owner_id'])
+        return request.make_response(json.dumps({'success': True, 'issues': items}), headers=[('Content-Type', 'application/json')])
+
+    @http.route('/mi90_eos/data/meetings', type='http', auth='user', methods=['GET'], csrf=False)
+    def meetings(self, **kw):
+        items = request.env['eos.meeting'].sudo().search_read([], ['id', 'name', 'date'])
+        return request.make_response(json.dumps({'success': True, 'meetings': items}), headers=[('Content-Type', 'application/json')])
+
     @http.route('/mi90_eos/data/scorecard', type='http', auth='user', methods=['GET'], csrf=False)
     def scorecard(self, **kw):
         # Minimal scorecard payload (frontend can compute labels)
@@ -34,6 +45,69 @@ class Mi90EosController(http.Controller):
             'overdue': overdue,
         }
         return request.make_response(json.dumps({'success': True, 'scorecard': payload}), headers=[('Content-Type', 'application/json')])
+
+    @http.route('/mi90_eos/data/scorecard_table', type='http', auth='user', methods=['GET'], csrf=False)
+    def scorecard_table(self, **kw):
+        """Return scorecard matrix: weeks and KPI rows (owner, name, target, unit, values per week)."""
+        # Determine last N weeks ending today
+        N = int(kw.get('weeks', 10))
+        today = fields.Date.context_today(request.env)
+        # Build weeks as ISO week starts (Monday) ending at the current week
+        weeks = []
+        # ensure today is a date, not string
+        monday = today - timedelta(days=today.weekday())
+        dt = monday
+        for i in range(N):
+            weeks.append(str(dt))
+            dt = dt - timedelta(days=7)
+        weeks.reverse()  # oldest first
+
+        KPI = request.env['eos.kpi'].sudo()
+        VAL = request.env['eos.kpi.value'].sudo()
+        kpis = KPI.search_read([], ['id', 'name', 'unit', 'target', 'owner_id'])
+        # Preload values for all KPIs in time range
+        min_date = weeks[0] if weeks else today
+        max_date = weeks[-1] if weeks else today
+        values = VAL.search_read([
+            ('date', '>=', min_date),
+            ('date', '<=', max_date)
+        ], ['kpi_id', 'date', 'value'])
+        # Index values by (kpi_id, week_label)
+        by_key = {}
+        for v in values:
+            k_id = v['kpi_id'][0] if isinstance(v['kpi_id'], list) else v['kpi_id']
+            # normalize to week (Monday) key
+            vd = v['date']
+            if isinstance(vd, str):
+                # convert to date object safely
+                y, m, d = vd.split('-')
+                vd = date(int(y), int(m), int(d))
+            wk = vd - timedelta(days=vd.weekday())
+            dkey = str(wk)
+            by_key.setdefault((k_id, dkey), []).append(v['value'])
+
+        rows = []
+        for k in kpis:
+            vals = {}
+            for w in weeks:
+                arr = by_key.get((k['id'], w))
+                if arr:
+                    # if multiple entries same week/day pick last
+                    vals[w] = arr[-1]
+            rows.append({
+                'owner': k['owner_id'][1] if k.get('owner_id') else '',
+                'name': k['name'],
+                'target': k.get('target') or 0.0,
+                'unit': k.get('unit') or '',
+                'values': vals,
+            })
+
+        payload = {
+            'weeks': weeks,
+            'rows': rows,
+            'last_update': str(today),
+        }
+        return request.make_response(json.dumps({'success': True, 'table': payload}), headers=[('Content-Type', 'application/json')])
 
     # Key Results CRUD
     @http.route('/mi90_eos/data/key_results/create', type='json', auth='user')

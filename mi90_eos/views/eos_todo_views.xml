@@ -8,6 +8,7 @@
         <field name="name"/>
         <field name="owner_id"/>
         <field name="due_date"/>
+        <field name="meeting_id"/>
         <field name="status"/>
         <field name="progress" widget="progressbar"/>
         <field name="date_create"/>
@@ -83,6 +84,7 @@
             <group>
               <field name="owner_id" options="{'no_create': True}"/>
               <field name="due_date"/>
+              <field name="meeting_id" options="{'no_create': True}"/>
               <field name="rock_id" options="{'no_create': True}"/>
             </group>
             <group>

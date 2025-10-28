@@ -15,96 +15,76 @@
       
 
       <div class="mi90--grid">
+        <!-- Scorecard ancho (ocupa 2 columnas) -->
         <div class="mi90--card mi90--scorecard">
-          <h2>Panel de Control</h2>
-          <div class="scorecard--toolbar">
-            <div class="tabs">
-              <span class="tab active">Semanal</span>
-              <span class="tab">Mensual</span>
-              <span class="tab">Trimestral</span>
-              <span class="tab">Anual</span>
-            </div>
-          </div>
-          <table class="scorecard--table">
-            <thead>
-              <tr>
-                <th>Métrica</th>
-                <th>Meta</th>
-                <th>Actual</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="dot dot-green"></span>Conversaciones significativas</td>
-                <td>≥ 25</td>
-                <td>16.2</td>
-                <td><span class="dot dot-red"></span></td>
-              </tr>
-              <tr>
-                <td><span class="dot dot-blue"></span>Nuevos clientes</td>
-                <td>≥ 0.25</td>
-                <td>0.8</td>
-                <td><span class="dot dot-green"></span></td>
-              </tr>
-            </tbody>
-          </table>
+          <t t-call="mi90_eos.Scorecard"/>
         </div>
 
-        <div class="mi90--row">
-          <div class="mi90--card mi90--todos">
-            <h2>Tareas del equipo <span class="badge">3</span></h2>
-            <div class="todos--item">
-              <input type="checkbox" />
-              <span>Problema 5</span>
-              <span class="todos--tag">Hoy</span>
+        <!-- Analytics en la columna central (reemplaza To-Do) -->
+        <div class="mi90--card mi90--analytics">
+          <h2>Analítica de Issues y Objetivos</h2>
+          <div class="analytics--row">
+            <div class="analytics--chart card-issues-priority">
+              <div class="chart--title">Issues por prioridad</div>
+              <div class="chart--wrap">
+                <div class="pie pie-issues-priority" aria-label="Issues por prioridad"></div>
+                <ul class="chart--legend">
+                  <li><span class="dot dot-red"></span> Alta: <span class="issues-prio-high">0</span></li>
+                  <li><span class="dot dot-blue"></span> Media: <span class="issues-prio-medium">0</span></li>
+                  <li><span class="dot dot-green"></span> Baja: <span class="issues-prio-low">0</span></li>
+                </ul>
+              </div>
             </div>
-            <div class="todos--item">
-              <input type="checkbox" />
-              <span>To-Do #2</span>
-              <span class="todos--tag">Hoy</span>
-            </div>
-            <div class="todos--item">
-              <input type="checkbox" />
-              <span>To-Do #4</span>
-              <span class="todos--tag">Hoy</span>
+            <div class="analytics--chart card-issues-status">
+              <div class="chart--title">Issues abiertos vs resueltos</div>
+              <div class="bars">
+                <div class="barwrap"><div class="bar bar-open" style="width:0%"></div></div>
+                <div class="barwrap"><div class="bar bar-closed" style="width:0%"></div></div>
+              </div>
+              <div class="bars--labels">
+                <span>Abiertos: <strong class="issues-open-count">0</strong></span>
+                <span>Resueltos: <strong class="issues-closed-count">0</strong></span>
+              </div>
             </div>
           </div>
+          <div class="analytics--sep" style="height:12px"></div>
+          <div class="analytics--row">
+            <div class="analytics--chart card-rocks-status">
+              <div class="chart--title">Rocas por estado</div>
+              <div class="chart--wrap">
+                <div class="pie pie-rocks-status" aria-label="Rocas por estado"></div>
+                <ul class="chart--legend">
+                  <li><span class="dot dot-green"></span> Completadas: <span class="rocks-done-count">0</span></li>
+                  <li><span class="dot dot-blue"></span> En progreso: <span class="rocks-inprogress-count">0</span></li>
+                  <li><span class="dot dot-red"></span> Vencidas: <span class="rocks-overdue-count">0</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="analytics--chart card-rocks-kpis">
+              <div class="chart--title">Resumen de Rocas</div>
+              <ul class="chart--legend">
+                <li>Total: <strong class="rocks-total-count">0</strong></li>
+                <li>Promedio de progreso: <strong class="rocks-avg-progress">0%</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
+        <!-- Columna derecha: Rocks y Chart apilados -->
+        <div class="mi90--rightcol">
           <div class="mi90--card mi90--rocks">
-            <h2>Objetivos y Metas</h2>
-            <div class="rocks--item">
-              <div>✅ Asegurar 3 nuevos clientes</div>
-              <div class="rocks--progress">
-                <div class="rocks--progress-bar" style="width: 100%"></div>
-              </div>
-              <div class="rocks--meta">
-                <span>Completado</span>
-                <span>31 Mar</span>
-              </div>
-            </div>
-            <div class="rocks--item">
-              <div>👍 Roca #2</div>
-              <div class="rocks--progress">
-                <div class="rocks--progress-bar" style="width: 67%"></div>
-              </div>
-              <div class="rocks--meta">
-                <span>En progreso</span>
-                <span>31 Mar</span>
-              </div>
-            </div>
+            <t t-call="mi90_eos.Rocks"/>
           </div>
-
           <div class="mi90--card mi90--chart">
             <h2>Estado de Objetivos</h2>
             <div class="chart--wrap">
               <div class="pie" aria-label="Estados de L10"></div>
               <div class="chart--info">
-                <div class="chart--total">3 <span>Total</span></div>
+                <div class="chart--total"><span class="chart--total-num">0</span> <span>Total</span></div>
                 <ul class="chart--legend">
-                  <li><span class="dot dot-green"></span> 1 Completada - 33%</li>
-                  <li><span class="dot dot-blue"></span> 2 En curso - 67%</li>
-                  <li><span class="dot dot-red"></span> 0 Fuera de curso - 0%</li>
+                  <li><span class="dot dot-green"></span> <span class="chart--count-done">0</span> Completada - <span class="chart--pct-done">0%</span></li>
+                  <li><span class="dot dot-blue"></span> <span class="chart--count-inprogress">0</span> En curso - <span class="chart--pct-inprogress">0%</span></li>
+                  <li><span class="dot dot-red"></span> <span class="chart--count-overdue">0</span> Fuera de curso - <span class="chart--pct-overdue">0%</span></li>
                 </ul>
               </div>
             </div>

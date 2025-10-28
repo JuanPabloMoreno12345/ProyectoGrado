@@ -26,6 +26,7 @@
             <field name="rock_id"/>
             <field name="current_value"/>
             <field name="target_value"/>
+            <field name="kr_type"/>
             <field name="weight"/>
             <field name="status"/>
             <field name="note"/>

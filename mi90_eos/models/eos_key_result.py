@@ -11,6 +11,13 @@ class EosKeyResult(models.Model):
     current_value = fields.Float(string='Current', default=0.0)
     unit = fields.Char(string='Unit')
     weight = fields.Float(string='Weight', default=1.0)
+    kr_type = fields.Selection([
+        ('baseline', 'Línea Base'),
+        ('positive', 'Métrica Positiva (más es mejor)'),
+        ('negative', 'Métrica Negativa (menos es mejor)'),
+        ('threshold', 'Umbral (rango objetivo)'),
+        ('milestone', 'Hito (no métrico)')
+    ], string='Tipo KR', default='positive')
     status = fields.Selection([('new', 'New'), ('ontrack', 'On Track'), ('offtrack', 'Off Track'), ('done', 'Done')], default='new')
     last_update = fields.Datetime(string='Last Update')
     note = fields.Text(string='Note')

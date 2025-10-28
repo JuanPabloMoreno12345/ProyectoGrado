@@ -9,6 +9,11 @@ class EosRock(models.Model):
     description = fields.Text(string='Description')
     owner_id = fields.Many2one('res.users', string='Owner', ondelete='set null', index=True)
     due_date = fields.Date(string='Due Date', index=True)
+    objective_type = fields.Selection([
+        ('committed', 'Comprometido (Cualitativo/Roofshot)'),
+        ('aspirational', 'Aspiracional (Moonshot/10x)'),
+        ('learning', 'Aprendizaje (Experimento)')
+    ], string='Tipo de Objetivo', default='committed', help='Clasificación OKR del objetivo')
     status = fields.Selection([
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),

@@ -72,6 +72,9 @@
 .scorecard--table{width:100%;border-collapse:separate;border-spacing:0}
 .scorecard--table th,.scorecard--table td{padding:8px 10px;border-bottom:1px solid #eee;font-size:12px}
 .scorecard--table thead th{position:sticky;top:0;background:#f8fafc;color:#1f2937}
+.sc-ok{ color:#16a34a; font-weight:600 }
+.sc-bad{ color:#dc2626; font-weight:600 }
+.scorecard--table tbody tr:hover{ background:#f9fafb }
 
 /* Todos */
 .todos--item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9}
@@ -193,7 +196,7 @@
 
 @media (max-width: 1200px){
   .mi90--grid{grid-template-columns:1fr}
-  .mi90--row{grid-template-columns:1fr}
+  .mi90--rightcol{grid-column:auto}
 }
 
 /* Estilos específicos para el tablero To-Do */
@@ -219,6 +222,38 @@
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+}
+
+/* ---------------------- Improved layout overrides ---------------------- */
+/* 3-column dashboard: Scorecard wide, Todos center, Right column stacks */
+.mi90--grid{
+  grid-template-columns: 2fr 1.25fr 1.1fr;
+  gap: 20px;
+}
+.mi90--scorecard{ grid-column: 1 / span 2; }
+.mi90--analytics{ grid-column: 2; }
+.mi90--rightcol{ display: flex; flex-direction: column; gap: 20px; grid-column: 3; }
+.mi90--card{ padding:20px; }
+.mi90--card h2{ margin-bottom:14px; font-size:17px; }
+
+/* To-Do board: ensure readable column width and allow horizontal scroll */
+.mi90--todos .todos-board{ display:grid; grid-template-columns: repeat(4, minmax(220px, 1fr)); gap:12px; overflow-x:auto; padding-bottom:4px }
+.mi90--todos .todos-column{ min-width:220px; border-radius:10px; background:#fff }
+
+/* Chart proportions */
+.mi90--chart .pie{ width:200px; height:200px }
+.mi90--chart .chart--wrap{ gap:20px }
+
+/* Right column lists spacing */
+.rocks--list{ gap:12px }
+.rocks--item{ padding:10px 0 }
+.scorecard--table th,.scorecard--table td{ padding:10px 12px }
+
+/* Responsive: collapse to one column under 1200px */
+@media (max-width: 1200px){
+  .mi90--grid{ grid-template-columns: 1fr; }
+  .mi90--scorecard{ grid-column: auto; }
+  .mi90--rightcol{ grid-column: auto }
 }
 
 .todo-item:hover {
@@ -346,3 +381,17 @@
   opacity: 0.5;
   transform: rotate(5deg);
 }
+
+/* ------------------- Analytics (Issues) ------------------- */
+.analytics--row{ display:flex; gap:16px; align-items:stretch; }
+.analytics--chart{ flex:1; background:#fff; border:1px solid #eee; border-radius:12px; padding:12px }
+.analytics--chart .chart--title{ font-weight:600; color:#5b21b6; margin-bottom:8px }
+.analytics--chart .chart--wrap{ display:flex; gap:12px; align-items:center }
+.analytics--chart .chart--legend{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--ink) }
+.analytics--chart .bars{ display:flex; flex-direction:column; gap:10px; margin-top:8px }
+.analytics--chart .barwrap{ height:12px; background:#f1f5f9; border-radius:999px; overflow:hidden }
+.analytics--chart .bar{ height:100%; transition:width .3s ease }
+.analytics--chart .bar-open{ background:#ef4444 }
+.analytics--chart .bar-closed{ background:#22c55e }
+.analytics--chart .bars--labels{ display:flex; justify-content:space-between; color:var(--muted); font-size:12px; margin-top:6px }
+.analytics--sep{ margin:8px 0 }

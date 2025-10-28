@@ -23,6 +23,7 @@
             <field name="name"/>
             <field name="owner_id"/>
             <field name="due_date"/>
+            <field name="objective_type"/>
             <field name="status"/>
             <field name="progress"/>
           </group>
