@@ -11,7 +11,7 @@
         </div>
         <div class="filters">
           <label>Equipo</label>
-          <select disabled>
+          <select disabled="disabled">
             <option>Mi Equipo</option>
           </select>
         </div>
