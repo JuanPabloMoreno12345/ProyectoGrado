@@ -4,7 +4,7 @@
     <field name="name">eos.todo.tree</field>
     <field name="model">eos.todo</field>
     <field name="arch" type="xml">
-      <tree string="To-Dos" decoration-success="status=='done'" decoration-warning="status=='in_review'" decoration-info="status=='in_progress'">
+      <tree string="To-Dos" decoration-success="status=='done'" decoration-warning="status=='in_review'" decoration-info="status=='in_progress'" editable="bottom">
         <field name="name"/>
         <field name="owner_id"/>
         <field name="due_date"/>
@@ -12,6 +12,48 @@
         <field name="progress" widget="progressbar"/>
         <field name="date_create"/>
       </tree>
+    </field>
+  </record>
+
+  <record id="view_eos_todo_kanban" model="ir.ui.view">
+    <field name="name">eos.todo.kanban</field>
+    <field name="model">eos.todo</field>
+    <field name="arch" type="xml">
+      <kanban class="o_kanban_small_column">
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click">
+              <div class="o_kanban_record_top">
+                <strong>
+                  <field name="name"/>
+                </strong>
+              </div>
+              <div class="o_kanban_record_body">
+                <div>
+                  <span class="text-muted">Asignado:</span>
+                  <field name="owner_id"/>
+                </div>
+                <div>
+                  <span class="text-muted">Vence:</span>
+                  <field name="due_date"/>
+                </div>
+                <div>
+                  <span class="text-muted">Estado:</span>
+                  <field name="status"/>
+                </div>
+                <div>
+                  <field name="progress" widget="progressbar"/>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+        <field name="name"/>
+        <field name="owner_id"/>
+        <field name="due_date"/>
+        <field name="status"/>
+        <field name="progress"/>
+      </kanban>
     </field>
   </record>
 
@@ -27,9 +69,9 @@
                   invisible="status != 'in_progress'"/>
           <button name="action_mark_done" type="object" string="Completar" class="btn-success" 
                   invisible="status not in ('in_progress', 'in_review')"/>
-          <button name="action_reset_to_todo" type="object" string="Reiniciar" class="btn-secondary" 
-                  invisible="status in ('todo', 'cancel')"/>
-          <field name="status" widget="statusbar" statusbar_visible="todo,in_progress,in_review,done"/>
+    <button name="action_reset_to_todo" type="object" string="Reiniciar" class="btn-secondary" 
+      invisible="status in ('todo', 'cancel')"/>
+    <field name="status" widget="statusbar" statusbar_visible="todo,in_progress,in_review,done,cancel"/>
         </header>
         <sheet>
           <div class="oe_title">
@@ -85,9 +127,9 @@
   <record id="action_eos_todo" model="ir.actions.act_window">
     <field name="name">To-Do</field>
     <field name="res_model">eos.todo</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">kanban,tree,form</field>
     <field name="search_view_id" ref="view_eos_todo_search"/>
-    <field name="context">{'search_default_pending': 1}</field>
+    <field name="context">{'search_default_pending': 1, 'group_by': 'status'}</field>
     <field name="help" type="html">
       <p class="o_view_nocontent_smiling_face">
         ¡Crea tu primera tarea!
